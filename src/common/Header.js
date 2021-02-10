@@ -82,6 +82,10 @@ class Header extends Component {
               <InputLabel htmlFor="userName">Username</InputLabel>
               <Input id="userName" type="text"></Input>
             </FormControl>
+            <FormControl required>
+              <InputLabel htmlFor="password">Password</InputLabel>
+              <Input id="password" type="password"></Input>
+            </FormControl>
           </TabContainer>
         </Modal>
       </div>
