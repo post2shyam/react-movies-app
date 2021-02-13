@@ -1,5 +1,7 @@
 import React, { Component } from "react";
+import ReactDOM from "react-dom";
 import "./Home.css";
+import Details from "../details/Details";
 import Header from "../../common/Header";
 import { withStyles } from "@material-ui/core/styles";
 import moviesData from "../../assets/movieData";
@@ -73,6 +75,13 @@ class Home extends Component {
     this.setState({ artists: event.target.value });
   };
 
+  movieClickHandler = (movieId) => {
+    ReactDOM.render(
+      <Details movieId={movieId} />,
+      document.getElementById("root")
+    );
+  };
+
   render() {
     const { classes } = this.props;
     return (
@@ -105,6 +114,7 @@ class Home extends Component {
             >
               {moviesData.map((movie) => (
                 <GridListTile
+                  onClick={() => this.movieClickHandler(movie.id)}
                   className="released-movie-grid-item"
                   key={"grid" + movie.id}
                 >
@@ -197,6 +207,7 @@ class Home extends Component {
                     ))}
                   </Select>
                 </FormControl>
+
                 <FormControl className={classes.formControl}>
                   <TextField
                     id="releaseDateStart"
@@ -206,6 +217,7 @@ class Home extends Component {
                     InputLabelProps={{ shrink: true }}
                   />
                 </FormControl>
+
                 <FormControl className={classes.formControl}>
                   <TextField
                     id="releaseDateEnd"
