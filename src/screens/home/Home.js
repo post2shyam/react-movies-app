@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import "./Home.css";
 import Header from "../../common/Header";
 import { withStyles } from "@material-ui/core/styles";
-import moviesData from "../../assets/movieData";
 import GridList from "@material-ui/core/GridList";
 import GridListTile from "@material-ui/core/GridListTile";
 import GridListTileBar from "@material-ui/core/GridListTileBar";
@@ -57,6 +56,7 @@ class Home extends Component {
     this.state = {
       movieName: "",
       upcomingMovies: [],
+      releasedMovies: [],
       genres: [],
       artists: [],
     };
@@ -77,6 +77,20 @@ class Home extends Component {
     xhr.open("GET", this.props.baseUrl + "movies?status=PUBLISHED");
     xhr.setRequestHeader("Cache-Control", "no-cache");
     xhr.send(data);
+
+    let dataReleased = null;
+    let xhrReleased = new XMLHttpRequest();
+    xhrReleased.addEventListener("readystatechange", function () {
+      if (this.readyState === 4) {
+        that.setState({
+          releasedMovies: JSON.parse(this.responseText).movies,
+        });
+      }
+    });
+
+    xhrReleased.open("GET", this.props.baseUrl + "movies?status=RELEASED");
+    xhrReleased.setRequestHeader("Cache-Control", "no-cache");
+    xhrReleased.send(dataReleased);
   }
 
   movieNameChangeHandler = (event) => {
@@ -125,7 +139,7 @@ class Home extends Component {
               cols={4}
               className={classes.gridListMain}
             >
-              {moviesData.map((movie) => (
+              {this.state.releasedMovies.map((movie) => (
                 <GridListTile
                   onClick={() => this.movieClickHandler(movie.id)}
                   className="released-movie-grid-item"
