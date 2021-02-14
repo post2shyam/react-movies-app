@@ -11,10 +11,9 @@ import InputLabel from "@material-ui/core/InputLabel";
 import Input from "@material-ui/core/Input";
 import PropTypes from "prop-types";
 import FormHelperText from "@material-ui/core/FormHelperText";
-import ReactDOM from "react-dom";
-import BookShow from "../screens/bookshow/BookShow";
+import { Link } from "react-router-dom";
 
-const customStyle = {
+const customStyles = {
   content: {
     top: "50%",
     left: "50%",
@@ -45,24 +44,20 @@ class Header extends Component {
       value: 0,
       usernameRequired: "dispNone",
       username: "",
-      passwordRequired: "dispNone",
-      password: "",
+      loginPasswordRequired: "dispNone",
+      loginPassword: "",
+      firstnameRequired: "dispNone",
+      firstname: "",
+      lastnameRequired: "dispNone",
+      lastname: "",
+      emailRequired: "dispNone",
+      email: "",
+      registerPasswordRequired: "dispNone",
+      registerPassword: "",
+      contactRequired: "dispNone",
+      contact: "",
     };
   }
-
-  bookShowHandler = (e) => {
-    ReactDOM.render(<BookShow />, document.getElementById("root"));
-  };
-
-  loginClickHandler = () => {
-    this.state.username === ""
-      ? this.setState({ usernameRequired: "dispBlock" })
-      : this.setState({ usernameRequired: "dispNone" });
-
-    this.state.password === ""
-      ? this.setState({ passwordRequired: "dispBlock" })
-      : this.setState({ passwordRequired: "dispNone" });
-  };
 
   openModalHandler = () => {
     this.setState({
@@ -70,8 +65,18 @@ class Header extends Component {
       value: 0,
       usernameRequired: "dispNone",
       username: "",
-      passwordRequired: "dispNone",
-      password: "",
+      loginPasswordRequired: "dispNone",
+      loginPassword: "",
+      firstnameRequired: "dispNone",
+      firstname: "",
+      lastnameRequired: "dispNone",
+      lastname: "",
+      emailRequired: "dispNone",
+      email: "",
+      registerPasswordRequired: "dispNone",
+      registerPassword: "",
+      contactRequired: "dispNone",
+      contact: "",
     });
   };
 
@@ -83,12 +88,59 @@ class Header extends Component {
     this.setState({ value });
   };
 
-  inputUserNameChangeHandler = (e) => {
+  loginClickHandler = () => {
+    this.state.username === ""
+      ? this.setState({ usernameRequired: "dispBlock" })
+      : this.setState({ usernameRequired: "dispNone" });
+    this.state.loginPassword === ""
+      ? this.setState({ loginPasswordRequired: "dispBlock" })
+      : this.setState({ loginPasswordRequired: "dispNone" });
+  };
+
+  inputUsernameChangeHandler = (e) => {
     this.setState({ username: e.target.value });
   };
 
-  inputPasswordChangeHandler = (e) => {
-    this.setState({ password: e.target.value });
+  inputLoginPasswordChangeHandler = (e) => {
+    this.setState({ loginPassword: e.target.value });
+  };
+
+  registerClickHandler = () => {
+    this.state.firstname === ""
+      ? this.setState({ firstnameRequired: "dispBlock" })
+      : this.setState({ firstnameRequired: "dispNone" });
+    this.state.lastname === ""
+      ? this.setState({ lastnameRequired: "dispBlock" })
+      : this.setState({ lastnameRequired: "dispNone" });
+    this.state.email === ""
+      ? this.setState({ emailRequired: "dispBlock" })
+      : this.setState({ emailRequired: "dispNone" });
+    this.state.registerPassword === ""
+      ? this.setState({ registerPasswordRequired: "dispBlock" })
+      : this.setState({ registerPasswordRequired: "dispNone" });
+    this.state.contact === ""
+      ? this.setState({ contactRequired: "dispBlock" })
+      : this.setState({ contactRequired: "dispNone" });
+  };
+
+  inputFirstNameChangeHandler = (e) => {
+    this.setState({ firstname: e.target.value });
+  };
+
+  inputLastNameChangeHandler = (e) => {
+    this.setState({ lastname: e.target.value });
+  };
+
+  inputEmailChangeHandler = (e) => {
+    this.setState({ email: e.target.value });
+  };
+
+  inputRegisterPasswordChangeHandler = (e) => {
+    this.setState({ registerPassword: e.target.value });
+  };
+
+  inputContactChangeHandler = (e) => {
+    this.setState({ contact: e.target.value });
   };
 
   render() {
@@ -107,13 +159,11 @@ class Header extends Component {
           </div>
           {this.props.showBookShowButton === "true" ? (
             <div className="bookshow-button">
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={this.bookShowHandler}
-              >
-                Book Show
-              </Button>
+              <Link to={"/bookshow/" + this.props.id}>
+                <Button variant="contained" color="primary">
+                  Book Show
+                </Button>
+              </Link>
             </div>
           ) : (
             ""
@@ -124,7 +174,7 @@ class Header extends Component {
           isOpen={this.state.modalIsOpen}
           contentLabel="Login"
           onRequestClose={this.closeModalHandler}
-          style={customStyle}
+          style={customStyles}
         >
           <Tabs
             className="tabs"

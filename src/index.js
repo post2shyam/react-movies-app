@@ -1,14 +1,15 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-import Home from "./screens/home/Home";
+import "./common/common.css";
+import Controller from "./screens/Controller";
 import reportWebVitals from "./reportWebVitals";
 import "typeface-roboto";
 
 ReactDOM.render(
   <React.StrictMode>
     <div>
-      <Home />
+      <Controller />
     </div>
   </React.StrictMode>,
   document.getElementById("root")
