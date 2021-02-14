@@ -11,6 +11,8 @@ import InputLabel from "@material-ui/core/InputLabel";
 import Input from "@material-ui/core/Input";
 import PropTypes from "prop-types";
 import FormHelperText from "@material-ui/core/FormHelperText";
+import ReactDOM from "react-dom";
+import BookShow from "../screens/bookshow/BookShow";
 
 const customStyle = {
   content: {
@@ -47,6 +49,10 @@ class Header extends Component {
       password: "",
     };
   }
+
+  bookShowHandler = (e) => {
+    ReactDOM.render(<BookShow />, document.getElementById("root"));
+  };
 
   loginClickHandler = () => {
     this.state.username === ""
@@ -99,6 +105,19 @@ class Header extends Component {
               Login
             </Button>
           </div>
+          {this.props.showBookShowButton === "true" ? (
+            <div className="bookshow-button">
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={this.bookShowHandler}
+              >
+                Book Show
+              </Button>
+            </div>
+          ) : (
+            ""
+          )}
         </header>
         <Modal
           ariaHideApp={false}
