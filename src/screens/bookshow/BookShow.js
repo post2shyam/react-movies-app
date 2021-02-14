@@ -4,6 +4,7 @@ import Header from "../../common/Header";
 import Typography from "@material-ui/core/Typography";
 import "./BookShow.css";
 import Home from "../home/Home";
+import Confirmation from "../confirmation/Confirmation";
 import language from "../../common/language";
 import location from "../../common/location";
 import showDate from "../../common/showDate";
@@ -77,6 +78,11 @@ class BookShow extends Component {
     this.state.tickets === 0
       ? this.setState({ reqTickets: "dispBlock" })
       : this.setState({ reqTickets: "dispNone" });
+
+    ReactDOM.render(
+      <Confirmation bookingSummary={this.state} />,
+      document.getElementById("root")
+    );
   };
 
   render() {
