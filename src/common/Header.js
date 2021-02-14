@@ -197,7 +197,14 @@ class Header extends Component {
     this.setState({ contact: e.target.value });
   };
 
-  logoutHandler = (e) => {};
+  logoutHandler = () => {
+    sessionStorage.removeItem("uuid");
+    sessionStorage.removeItem("access-token");
+
+    this.setState({
+      loggedIn: false,
+    });
+  };
 
   render() {
     return (
